@@ -1,4 +1,7 @@
-let testArray=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
+let testInsert=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
+let testMerge=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
+let testQuick=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
+let testBubble=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
 /**
  * 插入排序算法
  * @param {array} arr 
@@ -16,7 +19,7 @@ function insetSort(arr){
     return arr
 }
 console.time('insert')
-let result=insetSort(testArray)
+let result=insetSort(testInsert)
 console.timeEnd('insert')
 console.log("插入排序",result)
 
@@ -55,7 +58,7 @@ const merge=function(left,right){
     return result
 }
 console.time('merge')
-mergeSort(testArray)
+mergeSort(testMerge)
 console.timeEnd('merge')
 
 /**
@@ -110,5 +113,22 @@ const position=function(arr,left,right){
     return i
 }
 console.time('quick')
-quickSort(testArray)
+quickSort(testQuick)
 console.timeEnd('quick')
+
+/**
+ * 冒泡排序算法
+ * @param {array} arr 
+ */
+function bubbleSort(arr){
+    let length=arr.length;
+    for(let i=0;i<length;i++){
+        for(j=0;j<length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                [arr[j],arr[j+1]]=[arr[j+1],arr[j]]
+            }
+        }
+    }
+    return arr
+}
+console.log('冒泡排序',bubbleSort(testBubble))

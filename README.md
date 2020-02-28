@@ -2,7 +2,7 @@
 
 ## 插入排序算法
 
-```
+```javascript
 let testArray=[5,2,6,3,8,9,0,4,10,3,100,24,66,32,67,76,12,15];
 
 function insetSort(arr){
@@ -26,7 +26,7 @@ console.log("插入排序",result)
 ```
 ## 归并排序算法
 
-```
+```javascript
 function mergeSort(arr){
     let arrRes=mergeSortRec(arr)
     console.log('归并排序',arrRes)
@@ -64,7 +64,7 @@ console.timeEnd('merge')
 ```
 ## 快速排序
 
-```
+```javascript
 function quickSort(arr){
     quick(arr,0,arr.length-1)
     console.log('快速排序',arr)
@@ -105,4 +105,20 @@ const position=function(arr,left,right){
 console.time('quick')
 quickSort(testArray)
 console.timeEnd('quick')
+```
+
+## 冒泡排序
+
+```javascript
+function bubbleSort(arr){
+    let length=arr.length;
+    for(let i=0;i<length;i++){
+        for(let j=0;j<length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                [arr[j],arr[j+1]]=[arr[j+1],arr[j]]
+            }
+        }
+    }
+    return arr
+}
 ```
