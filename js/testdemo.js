@@ -52,7 +52,23 @@ let thrfn=throttle((arg)=>{
     console.log('节流...'+arg)
 },1000)
 let i=0,j=0;
-setInterval(()=>{
-    thrfn(++i)
-    debfn(++j)
-},500)
+// setInterval(()=>{
+//     thrfn(++i)
+//     debfn(++j)
+// },500)
+
+const myPromise = () =>
+  Promise.resolve('I have resolved')
+
+const firstFunc = () => {
+    myPromise().then((res) => {
+      console.log(res + ' first');
+    });
+    console.log('first');
+}
+async function secondFunc() {
+    console.log(await myPromise());
+    console.log('second');
+}
+firstFunc();
+secondFunc();
