@@ -132,3 +132,5 @@ function bubbleSort(arr){
     return arr
 }
 console.log('冒泡排序',bubbleSort(testBubble))
+
+module.exports.quickSort=quickSort
