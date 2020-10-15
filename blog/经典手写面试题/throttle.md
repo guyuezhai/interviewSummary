@@ -1,41 +1,39 @@
-/** 
- * 节流函数实现
- * 
- * 节流函数的作用是控制函数在一定的时间 `N秒` 内最多执行一次，如果 `N秒` 内多次触发，只有一次生效。
- * 防抖函数在性能优化方面有很重要的作用，也是常考面试题之一，
- * 
- * **应用场景**
- * ondrag拖拽事件
- * onScoll滚动事件
- * 鼠标点击事件
- * 计算鼠标移动距离
- * 
- *
- * 
-*/
-/**
- * 
- * 简单版的节流函数
- * 
- * 1. throttle函数返回一个匿名函数，每次执行更新current当前时间，
- * 2. 计算当前current与上一次pre的差值，如果大于等于设定的时间间隔time则执行fn,并更新pre为当前时间,否则不做处理
- * 
- */
+ 
+ ## 节流函数实现
+ 
+ > 节流函数的作用是控制函数在一定的时间 `N秒` 内最多执行一次，如果 `N秒` 内多次触发，只有一次生效。
+ 
+ **应用场景**
 
+ > 1. ondrag拖拽事件
+ > 2. onScoll滚动事件
+ > 3. 鼠标点击事件
+ > 4. 计算鼠标移动距离
+ 
+ - 简单版的节流函数实现
+ 
+ 1. `throttle` 函数返回一个函数，每次执行更新 `current` 当前时间，
+ 2. 计算当前 `current` 与上一次 `pre` 的差值，如果大于等于设定的时间间隔 `time` 则执行 `fn` ,并更新 `pre` 为当前时间,否则不做处理.
+ 
+
+```javascript
 function throttle(fn,time){
-    var pre = new Date().getTime();
-    var _this = this;
+    var pre = 0;
     return function(){
         var current = new Date().getTime()
         if(current-pre>=time){
             pre = new Date().getTime();
-            fn.apply(_this,arguments)
+            fn.apply(this,arguments)
         }
     }
 }
+```
+- 复杂版本的节流函数
 
-// 复杂版本的节流函数
-function throttle2(fn,wait,options){
+考虑函数首尾执行
+
+```javascript
+function throttle(fn,wait,options){
     var timer,_this,args,res,pre=0;
     options=options || {}
     var later = function () {
@@ -79,12 +77,15 @@ function throttle2(fn,wait,options){
 
     return throttled
 }
+```
+- 验证函数执行结果
 
+```javascript
 var i=0
 function add(x){
     console.log('result---',x)
 }
-var exc=throttle2(add,1000)
+var exc=throttle(add,1000)
 
 var interval=setInterval(() => {
     (function(i){
@@ -97,3 +98,4 @@ setTimeout(() => {
     clearInterval(interval)
     // exc.cancel()
 }, 8000);
+```

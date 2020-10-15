@@ -1,3 +1,8 @@
+## `Promise` 实现
+
+`Promise` 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
+
+```javascript
 function MyPromise(excuator){   
     //参数合法校验
     if (typeof excuator !== 'function') {
@@ -11,6 +16,7 @@ function MyPromise(excuator){
     this.rejectFun = Function.prototype;
     var _this = this
 
+    //改变状态 并执行异步方法
     function changeState(state,value){
 
         if(_this.state!=='pending') return
@@ -22,12 +28,13 @@ function MyPromise(excuator){
             clearInterval(delayTimer);
             delayTimer = null;
 
-            var state=_this.state,value=_this.promiseValue;
+            var state = _this.state, value=_this.promiseValue;
 
             state === 'fulfilled' ? _this.resolveFun.call(_this,value) : _this.rejectFun.call(_this,value);
         }, 0);    
     
     }
+
     function resolve(value){
         changeState('fulfilled',value)
     }
@@ -105,13 +112,36 @@ MyPromise.reject = function (value) {
         reject(value)
     })
 }
+```
+- 验证 `MyPromise` 方法
 
+```javascript 
+
+var promise = new MyPromise((resolve,reject)=>{
+    resolve(10)
+    // reject('error')
+}).then((value)=>{
+    console.log('then--',value)
+    return MyPromise.reject('wew')
+},(reason)=>{
+    console.log('then--reject',reason)
+    
+}).then((value)=>{
+    console.log('then--',value)
+},(reason)=>{
+    console.log('then--reject-2',reason)
+})
+
+```
+
+## `Promise.all` 方法实现
+
+```javascript
 MyPromise.all = function (promiseArr) {
     var iterable = isIterable(promiseArr)
     if(!iterable){
         throw new TypeError(typeof promiseArr +" "+ promiseArr +" "+'is not iterable (cannot read property Symbol(Symbol.iterator))')
     }
-
     return new MyPromise(function (resolve,reject) {
         var index = 0,values=[],len=promiseArr.length;
         for(var i=0;i<len;i++){
@@ -136,6 +166,15 @@ MyPromise.all = function (promiseArr) {
     })
 }
 
+//判断对象是否可迭代
+function isIterable(target) {
+    return target!==null && typeof target[Symbol.iterator] === 'function'
+}
+
+```
+- 验证 `Promise.all` 执行
+
+```javascript 
 function fun1() {
     return MyPromise.resolve('fun1')
 }
@@ -154,10 +193,6 @@ function fun3() {
     })
 }
 
-//判断对象是否可迭代
-function isIterable(target) {
-    return target!==null && typeof target[Symbol.iterator] === 'function'
-}
 
 MyPromise.all([fun1(),fun2(),fun3(),23]).then(function (values) {
     console.log('all---',JSON.stringify(values))
@@ -165,18 +200,4 @@ MyPromise.all([fun1(),fun2(),fun3(),23]).then(function (values) {
     console.log('all---err',err)
 })
 
-
-var promise = new MyPromise((resolve,reject)=>{
-    resolve(10)
-    // reject('error')
-}).then((value)=>{
-    console.log('then--',value)
-    return MyPromise.reject('wew')
-},(reason)=>{
-    console.log('then--reject',reason)
-    
-}).then((value)=>{
-    console.log('then--',value)
-},(reason)=>{
-    console.log('then--reject-2',reason)
-})
+```
