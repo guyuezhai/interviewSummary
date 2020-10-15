@@ -1,5 +1,8 @@
-// bind 实现
-// bind 返回的是一个函数
+## bind 实现
+
+bind 返回的是一个函数
+
+```javascript
 Function.prototype.myBind = function(){
     let [context,args] = [...arguments]
     let _this = this;
@@ -11,3 +14,4 @@ Function.prototype.myBind = function(){
         return _this.apply(context,args.concat(arguments))
     }
 }
+```
