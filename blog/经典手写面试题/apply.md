@@ -1,5 +1,8 @@
  ## apply 的实现
 
+<details>
+<summary>实现详情</summary>
+
  **`call` 与 `apply` 的区别**
 
 `call` 可以有2个以上参数，
@@ -30,3 +33,4 @@ Function.prototype.myApply = function (context,args){
     return result
 }
 ```
+</details>

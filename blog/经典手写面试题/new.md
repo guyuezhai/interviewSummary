@@ -1,4 +1,7 @@
 ## new 的实现原理
+<details>
+<summary>实现详情</summary>
+
 1. 创建一个空的对象；
 2. 将新建对象作为构造函数的实例，构造函数中的this指向这个空对象
 3. 执行构造函数方法，将构造函数中的属性和方法添加到引用的对象上
@@ -28,3 +31,4 @@ let date = myNew(test,2134474774)
 let date2 = new test(2134474774)
 console.log(date,date2)
 ```
+</details>

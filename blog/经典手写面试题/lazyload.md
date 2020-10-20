@@ -1,9 +1,9 @@
-## 实现 `lazyLoad` 懒加载图片
-
-**应用场景**
+ ## 实现 `lazyLoad` 懒加载图片
+ **应用场景**
 
 在一些图片量比较多的网站，如果一打开页面就去加载所有的图片，那么难免会造成卡顿和白屏的现象，如果根据屏幕滚动一点点去加载可视区中的图片，就会有很好的性能提升。
-
+<details>
+<summary>实现详情</summary>
 
 我们可以给 `class="img-lazy"`的 `div` 一个固定的宽高，及背景颜色，当图片没有加载出来时显示出骨架；给 `img` 标签一个 `data-src` 属性配置真实的图片资源地址,当元素出现在可是区域时把真实的地址赋值给 `src` 属性，加载真正的图片。
 
@@ -43,3 +43,4 @@ function lazyLoad(){
 window.addEventListener('scroll',lazyLoad,false)
              
 ```
+</details>

@@ -3,6 +3,9 @@
   示例如下：
  > unique( [1,2,2,3,2,4,5,3] )  // 返回结果为 [ 1, 2, 3, 4, 5 ]
 
+<details>
+<summary>实现详情</summary>
+
 - 利用ES6新增的数据类型 `Set` 实现
 
 ` Set `它类似于数组，但是成员的值都是唯一的，没有重复的值。
@@ -92,3 +95,4 @@ let result = unique(testArr)
 console.log(result) //[ 1, 2, 3, 4, 5 ]
 
 ```
+</details>

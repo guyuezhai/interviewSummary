@@ -1,6 +1,9 @@
 
   ## 深拷贝/浅拷贝区别，实现深拷贝
   
+<details>
+<summary>实现详情</summary>
+
   > 深拷贝和浅拷贝是针对复杂数据类型来说的，浅拷贝只拷贝一层，而深拷贝是层层拷贝
   
   **深拷贝**
@@ -84,3 +87,4 @@ function deepClone(target,wmap = new WeakMap()){
     return res
 }
 ```
+</details>

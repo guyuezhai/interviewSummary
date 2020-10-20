@@ -1,5 +1,8 @@
 ## call 方法实现
 
+<details>
+<summary>实现详情</summary>
+
 > 所有的方法都可以调用 `call/apply/bind` 方法， 它们是函数原型上的方法，因此需要挂载到`Function.prototype`
 
 下面我们来动手实现一下我们自己的 call/apply/bind方法
@@ -30,3 +33,4 @@ Function.prototype.myCall = function( ){
     return result
 }
 ```
+</details>
