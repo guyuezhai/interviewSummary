@@ -1,6 +1,8 @@
 ## bind 实现
+<details>
+<summary>实现详情</summary>
 
-bind 返回的是一个函数
+与 `call/apply` 不同 bind 返回的是一个函数
 
 ```javascript
 Function.prototype.myBind = function(){
@@ -15,3 +17,4 @@ Function.prototype.myBind = function(){
     }
 }
 ```
+</details>

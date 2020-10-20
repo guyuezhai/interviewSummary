@@ -134,6 +134,7 @@ var promise = new MyPromise((resolve,reject)=>{
 
 ```
 
+
 ## `Promise.all` 方法实现
 
 ```javascript
@@ -201,3 +202,4 @@ MyPromise.all([fun1(),fun2(),fun3(),23]).then(function (values) {
 })
 
 ```
+

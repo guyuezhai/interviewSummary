@@ -1,6 +1,8 @@
 
  ## JSONP 实现
- 
+ <details>
+<summary>实现详情</summary>
+
 > JSONP为前端实现跨域的一种方式，其原理是利用 `html` 的 `script` 标签的 `src` 属性不受浏览器同源策略束缚，可以任意获取服务器脚本并执行。
 
 JSONP正是利用这一特性，动态创建script标签来实现跨域的。
@@ -58,3 +60,4 @@ jsonp({
     console.log(res)
 })
 ```
+</details>
