@@ -929,7 +929,106 @@ type alias extends interface
         description?: string | undefined;
     }
     ```
+7. Record
+`Record<K extends keyof any, T>`的作用是将`K`中所有的属性值转化为`T`类型
+**定义**
+```ts
+/**
+ * node_modules/typescript/lib/lib.es5.d.ts
+ * Construct a type with a set of properties K of type T
+ */
+type Record<K extends keyof any, T> = {
+ [P in K]: T;
+};
+```
 
+**示例**
+```ts
+interface PageInfo {
+ title: string;
+}
+type Page = "home" | "about" | "contact";
+const x: Record<Page, PageInfo> = {
+ about: { title: "about" },
+ contact: { title: "contact" },
+ home: { title: "home" }
+};
+```
+
+8. Pick
+`Pick<T, K extends keyof T>`的作用是将某个类型中的子属性挑出来，变成包含这个类型部分属性的子类型。
+
+**定义**
+
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+/**
+ * From T, pick a set of properties whose keys are in the union K
+ */
+type Pick<T, K extends keyof T> = {
+ [P in K]: T[P];
+};
+```
+
+**示例**
+
+```ts
+interface Todo{
+    title:string;
+    description:string;
+    completed:boolean;
+}
+
+type TodoPreview = Pick<Todo, "title" | "completed">;
+
+const todo:TodoPreview = {
+    title:'ts',
+    completed:true
+}
+```
+9. Exclude
+`Exclude<T, U>`的作用是将某个类型中属于另一个的类型移除掉。
+
+**定义**
+
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+/**
+ * Exclude from T those types that are assignable to U
+ */
+type Exclude<T, U> = T extends U? never: T;
+```
+如果`T`能赋值给`U`类型的话，那么就返回`never`类型，否则就返回`T`类型。最终实现的效果就是将`T`中某些属于`U`的类型移除掉。
+
+**示例**
+```ts
+type T0 = Exclude<'a' | 'b' | 'c', 'a'>; // 'b' | 'c'
+type T1 = Exclude<'a' | 'b' | 'c', 'a' | 'b' >; // 'c'
+type T2 = Exclude<string | number | (()=> void), Function>; //string | number
+```
+10. ReturnType
+`ReturnType<T>`的作用是用于获取函数`T`的返回类型。
+
+**定义**
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+/**
+ * Obtain the return type of a function type
+ */
+ type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R? R : any;
+ ```
+ **示例**
+ ```ts
+ type T0 = ReturnType<()=>string>; //string
+ type T1 = ReturnType<(s:string)=>void>; //void
+ type T2 = ReturnType<<T>() => T>; // {}
+ type T3 = ReturnType<<T extends U, U extends number[]>() => T>; //number []
+ type T4 = ReturnType<any>; // any
+ type T5 = ReturnType<never>; //any
+ type T6 = ReturnType<string>; //Error
+ type T7 = ReturnType<Function>; //Error
+ ```
+ 
 # Typescript 装饰器
 
 - 装饰器什么？
